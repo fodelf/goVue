@@ -1,0 +1,36 @@
+<!--
+ * @Description: 描述
+ * @Author: 吴文周
+ * @Github: https://github.com/fodelf
+ * @Date: 2022-03-05 05:20:56
+ * @LastEditors: 吴文周
+ * @LastEditTime: 2022-03-14 22:27:25
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      window.addEventListener("load", () => {
+        const ws = new WebSocket("ws://" + document.location.host + "/message");
+        ws.onopen = function (evt) {
+          // console.log("Connection open ...");
+        };
+        ws.onmessage = function (evt) {
+          // console.log("Received Message: " + evt.data);
+          location.reload();
+        };
+        ws.onclose = function (evt) {
+          // appendLog(item);
+        };
+      });
+    </script>
+    <script src="js/index.js" type="module"></script>
+  </body>
+</html>
