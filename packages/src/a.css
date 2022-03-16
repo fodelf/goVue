@@ -1,0 +1,9 @@
+#container span {
+  font-size: 24px;
+}
+#container #parent span {
+  font-size: 12px;
+}
+#container #parent #child span {
+  font-size: 6px;
+}
