@@ -4,7 +4,7 @@
  * @Github: https://github.com/fodelf
  * @Date: 2022-03-12 06:24:21
  * @LastEditors: 吴文周
- * @LastEditTime: 2022-03-14 22:26:39
+ * @LastEditTime: 2022-03-16 22:47:14
  */
 package pkg
 
@@ -17,7 +17,7 @@ import (
 )
 func BuildInit (){
 	dir, _ := os.Getwd()
-	EntryPoint := path.Join(dir, "packages", "src", "index.ts")
+	EntryPoint := path.Join(dir, "packages", "src", "debugger.ts")
 	api.Build(api.BuildOptions{
 		// LogLevel:    api.LogLevelInfo,
 		EntryPoints: []string{EntryPoint},

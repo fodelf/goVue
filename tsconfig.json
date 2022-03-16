@@ -19,9 +19,7 @@
     "types": ["jest", "puppeteer", "node"],
     "rootDir": ".",
     "paths": {
-      "@vue/compat": ["packages/vue-compat/src"],
-      "@vue/*": ["packages/*/src"],
-      "vue": ["packages/vue/src"]
+      "src": ["packages/src"]
     }
   },
   "include": [

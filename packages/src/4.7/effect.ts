@@ -4,7 +4,7 @@
  * @Github: https://github.com/fodelf
  * @Date: 2022-03-15 08:56:55
  * @LastEditors: 吴文周
- * @LastEditTime: 2022-03-16 22:33:04
+ * @LastEditTime: 2022-03-16 21:28:17
  */
 // 所有响应式对象缓存
 export let targetsMap: WeakMap<
@@ -26,15 +26,14 @@ export interface Target {
   [string: string]: any;
 }
 export interface Option {
-  scheduler?: boolean;
-  lazy?: boolean;
+  scheduler: boolean;
 }
 
 /**
  * @name: ReactiveEffect
  * @description: 当前激活函数类
  */
-export class ReactiveEffect {
+class ReactiveEffect {
   // 收集函数
   public fu: Function;
   // 配置参数
@@ -74,8 +73,7 @@ export function clearQueue() {
  * @description: 副作用封装
  * @param {Function} fun
  */
-export function effect(fun: Function, option?: Option): Function {
-  debugger;
+export function effect(fun: Function, option?: Option) {
   // 激活对象 新增改动
   const effectObject = new ReactiveEffect(fun, option);
   // 将当前收集函数放入栈中
@@ -84,23 +82,14 @@ export function effect(fun: Function, option?: Option): Function {
   isTrackActive = true;
   function effectFu(effectObject: ReactiveEffect) {
     effectActive = effectObject;
-    if (!option?.lazy) {
-      fun();
-    } else {
-      return fun();
-    }
+    fun();
     // 嵌套收集的情况下数据是否清空
     if (effectActiveFuList.length == 0) {
       isTrackActive = false;
       effectActive = null;
     }
   }
-  if (option?.lazy) {
-    return effectFu;
-  } else {
-    effectFu(effectObject);
-    return () => {};
-  }
+  effectFu(effectObject);
 }
 /**
  * @name: track
