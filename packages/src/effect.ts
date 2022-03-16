@@ -4,7 +4,7 @@
  * @Github: https://github.com/fodelf
  * @Date: 2022-03-15 08:56:55
  * @LastEditors: 吴文周
- * @LastEditTime: 2022-03-16 08:18:19
+ * @LastEditTime: 2022-03-16 08:58:40
  */
 // 所有响应式对象缓存
 export let targetsMap: WeakMap<
@@ -32,6 +32,7 @@ export function effect(fun: Function) {
   // 设置激活收集状态 新增改动
   isTrackActive = true;
   function effectFu(fun: Function) {
+    effectActiveFu = fun;
     fun();
     // 嵌套收集的情况下数据是否清空 新增改动
     if (effectActiveFuList.length == 0) {
@@ -93,6 +94,7 @@ export function trigger(target: Target, key: unknown) {
         if (effectActiveFu != item) {
           effectActiveFu = item;
           item();
+          effectActiveFu = null;
         }
       });
     }
