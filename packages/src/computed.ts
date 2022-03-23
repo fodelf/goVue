@@ -1,11 +1,4 @@
-import {
-  effect,
-  ReactiveEffect,
-  SetEffectActive,
-  SetIsTrackActive,
-  track,
-  trigger
-} from './effect'
+import { effect, ReactiveEffect } from './effect'
 
 /*
  * @Description: 计算属性
@@ -13,7 +6,7 @@ import {
  * @Github: https://github.com/fodelf
  * @Date: 2022-03-15 08:56:55
  * @LastEditors: 吴文周
- * @LastEditTime: 2022-03-23 11:42:09
+ * @LastEditTime: 2022-03-23 16:26:48
  */
 interface ComputedObject {
   value: any
@@ -38,7 +31,7 @@ class ComputedRefImpl {
     this.getter = getter
     this.effectObject = new ReactiveEffect(this.getter, () => {
       this.isDirty = true
-      trigger(this, 'value')
+      // trigger(this, 'value')
     })
     this.effectFu = effect(getter, {
       lazy: true,
@@ -50,10 +43,10 @@ class ComputedRefImpl {
     if (this.isDirty) {
       this.cacheData = this.effectFu()
       this.isDirty = false
-      SetEffectActive(this.effectObject)
-      SetIsTrackActive(true)
-      track(this, 'value')
-      SetIsTrackActive(false)
+      // SetEffectActive(this.effectObject)
+      // SetIsTrackActive(true)
+      // // track(this, 'value')
+      // SetIsTrackActive(false)
     }
     return this.cacheData
   }

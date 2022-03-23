@@ -2,9 +2,7 @@ import {
   effect,
   ReactiveEffect,
   SetEffectActive,
-  SetIsTrackActive,
-  track,
-  trigger
+  SetIsTrackActive
 } from './effect'
 
 /*
@@ -38,7 +36,7 @@ class ComputedRefImpl {
     this.getter = getter
     this.effectObject = new ReactiveEffect(this.getter, () => {
       this.isDirty = true
-      trigger(this, 'value')
+      // trigger(this, 'value')
     })
     this.effectFu = effect(getter, {
       lazy: true,
@@ -52,7 +50,7 @@ class ComputedRefImpl {
       this.isDirty = false
       SetEffectActive(this.effectObject)
       SetIsTrackActive(true)
-      track(this, 'value')
+      // track(this, 'value')
       SetIsTrackActive(false)
     }
     return this.cacheData
